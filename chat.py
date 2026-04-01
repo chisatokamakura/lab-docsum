@@ -8,20 +8,18 @@ load_dotenv()
 # non-class names (e.g. function/variable) are in snake_case: 
 class Chat:
     client = Groq()
-    def __init__(self, message):
+    def __init__(self):
         self.messages = [
             {
                 "role": "system",
                 "content": "Write the output in 1-2 sentences"
-            },
-            {
-                "role": "user",
-                "content": message,
             }
         ]
-    def send_message(self):
+    def send_message(self, message):
         self.messages.append(
             {
+                # system: never change; user: changes a lot 
+                # the message that you are sending to the AI
                 'role': 'user', 
                 'content': message
             }
@@ -31,34 +29,21 @@ class Chat:
             model="llama-3.1-8b-instant",
         )
         result = chat_completion.choices[0].message.content
-        messages.append({
+        self.messages.append({
             'role': 'assistant',
             'content': result
         })
         # tell LLM what we were previously talking about
         return result
 
-'''
-client = Groq(
-    api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
-)
+# this makes the user interface nicer by saying 'chat>'
+if __name__ == '__main__': 
+    chat = Chat()
+    try:
+        while True: 
+                user_input = input('chat>')
+                response = chat.send_message(user_input)
+                print(response)
+    except KeyboardInterrupt:
+        print()
 
-chat_completion = client.chat.completions.create(
-    # messages is the most important thing to modify
-    messages=[
-        {
-            "role": "system",
-            "content": "Write the output in 1-2 sentences"
-        },
-        {
-            "role": "user",
-            "content": "Explain the importance of low latency LLMs",
-        }
-    ],
-    model="llama-3.1-8b-instant",
-    # model is the second most important thing to modify 
-    # tempting to always use the best model which is llama-3.3-70b-versatile 
-    # but you should only use that for important work bc of usage limits
-)
-print(chat_completion.choices[0].message.content)
-'''
