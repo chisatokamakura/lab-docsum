@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cmc-cs040-chisatokamakura"
-version = "0.1.0"
+version = "0.1.2"
 description = "LLM-based chat/document summarization project for CSC040"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -15,3 +15,6 @@ dependencies = [
 
 [project.scripts]
 chat = "chat:repl"
+
+[tool.flake8]
+exclude = ["venv", ".venv", "__pycache__"]

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="description"
+        content="Predictions and analysis for Olympic figure skating events, including men, women, pairs, and ice dance.">
+
+  <title>Olympic Figure Skating Predictions</title>
+
+  <!-- Optional: Open Graph (link preview) -->
+  <meta property="og:url" content="https://chisatokamakura.github.io/" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="Olympic Figure Skating Predictions" >
+  <meta property="og:description" content="My favorite skaters and predictions for the 2026 Olympics." >
+  <meta property="og:image" content="milanmascot.png" >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Existing menu styles (fine to keep even if not used yet) */
+    ul.menu{
+      list-style-type: none;
+      display: block;
+      overflow: hidden;
+      padding-left: 0;
+    }
+    li.menu {
+      background-color: lightblue;
+      float: left;
+      margin: 10px;
+      padding: 10px;
+      display: block;
+    }
+    li.menu:hover {
+      background-color: lightpink;
+    }
+    li#selected{
+      background-color: lightblue;
+    }
+
+    img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    /* ✅ Requirement: at least 3 DIVs styled using CSS */
+    .section {
+      border: 3px solid hotpink;
+      padding: 12px;
+      margin: 14px 0;
+      background: #fff7fb;
+      border-radius: 10px;
+    }
+
+    /* ✅ Requirement: at least 1 SPAN styled using CSS */
+    .highlight {
+      background: #ffe0ef;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    /* Optional table styling */
+    table.predictions {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+    }
+    table.predictions th, table.predictions td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+
+  <!-- ✅ Requirement: Google Analytics tracker using <script> tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSRJ6KMY5E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CSRJ6KMY5E');
+  </script>
+</head>
+
+<body>
+
+  <h1 style="color:black;">My Favorite Olympic Figure Skaters</h1>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="pairs.html">Pairs</a>
+    <a href="icedance.html">Ice Dance</a>
+  </nav>
+
+  <p>
+    I made this website to share my excitement for the <span class="highlight">2026 Winter Olympics</span>
+    and to keep track of my favorite skaters across each discipline.
+  </p>
+
+  <p>
+    I’m especially interested in how different athletes strategize to peak at the right time and create compelling personal narratives. More than at any other competition, it is so important for skaters to engage with audiences, as it is one of the few times the general public, not just figure skating fans, will be tuned in. 
+  </p>
+
+  <p>
+    Below are a few storylines I’m excited to follow, plus my personal winner predictions.
+  </p>
+
+  <div class="section">
+    <h2>What I'm Looking Forward to in the 2026 Olympics!</h2>
+    <ol>
+      <li>
+        <a href="https://www.usatoday.com/story/sports/olympics/2026/01/10/us-womens-figure-skating-olympic-team-amber-glenn-alysa-liu-isabeau-levito/88112165007/" target="_blank" rel="noopener">
+          The Women's
+        </a>
+        field is deeper than it has ever been. It's anyone's to win!
+      </li>
+
+      <li>
+        <a href="https://www.usatoday.com/story/entertainment/tv/2026/02/02/netflix-glitter-gold-ice-dancing-cast/88451167007/" target="_blank" rel="noopener">
+          Ice Dance:
+        </a>
+        Madison Chock and Evan Bates are the favorites, but 2022 Olympic champion Guillame Cizeron just returned with a new partner.
+        Who will take the crown?
+      </li>
+
+      <li>
+        <a href="https://www.ellecanada.com/sport/canadian-figure-skater-deanna-stellato-dudek-2026-winter-olympics" target="_blank" rel="noopener">
+          Deanna Stellato-Dudek:
+        </a>
+        at 42, is the oldest person currently competing and is on a remarkable comeback journey.
+      </li>
+
+      <li>
+        <a href="https://www.theatlantic.com/magazine/2026/03/ilia-malinin-olympic-figure-skating/685766/" target="_blank" rel="noopener">
+          Ilia Malinin:
+        </a>
+        the first skater to ever land a quad axel in history. Will he land it at the Olympics and take home the gold?
+      </li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>2026 Olympic Mascots Tina and Milo!</h2>
+    <img src="milanmascot.png" alt="2026 Olympic Mascots Tina and Milo">
+  </div>
+
+  <div class="section">
+    <h2>My 2026 Olympic Winner Predictions:</h2>
+
+    <table class="predictions">
+      <tr>
+        <th>Category</th>
+        <th>Predicted Winner</th>
+        <th>Country</th>
+      </tr>
+      <tr>
+        <td>Men</td>
+        <td>Ilia Malinin</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Women</td>
+        <td>Kaori Sakamoto</td>
+        <td>Japan</td>
+      </tr>
+      <tr>
+        <td>Pairs</td>
+        <td>Riku Miura / Ryuichi Kihara</td>
+        <td>Japan</td>
+      </tr>
+      <tr>
+        <td>Ice Dance</td>
+        <td>Madison Chock / Evan Bates</td>
+        <td>United States</td>
+      </tr>
+    </table>
+
+    <p><span class="highlight">**If I am proven correct I will scream with joy and buy everyone donuts.**</span></p>
+  </div>
+
+  <div class="section">
+  <h2>Course & Instructor Links</h2>
+
+  <p>
+    Follow the course webpage:
+    <a href="https://github.com/mikeizbicki/cmc-csci040">
+      CMC CSCI 040 on GitHub
+    </a>
+  </p>
+
+  <p>
+    Follow the instructor:
+    <a href="https://izbicki.me">
+      Mike Izbicki's Personal Website
+    </a>
+  </p>
+</div>
+
+<div class="section">
+  <h2>Classmate Projects</h2>
+
+  <p>
+    Check out Jiyeon's project:
+    <a href="https://jiyeonkim26.github.io/">Jiyeon's World</a>
+  </p>
+
+  <p>
+    Check out Preslie's project:
+    <a href="https://preslielampitt.github.io/">Visiting the Greek Islands</a>
+  </p>
+</div>
+
+
+  <p>
+    <b>hello</b> <i>world</i>!
+    <a href="https://github.com/mikeizbicki/cmc-csci040">CS040</a> by
+    <a href="https://chisatokamakura.github.io">Chisato Kamakura</a> is marked
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>
+    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left:.2em;">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/zero.svg" alt="" style="max-width: 1em;max-height:1em;margin-left:.2em;">
+  </p>
+
+</body>
+</html>
