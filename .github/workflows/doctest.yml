@@ -29,10 +29,16 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          python -m coverage run -m pytest chat.py --doctest-modules
+           pytest chat.py tools/calculate.py tools/ls.py tools/cat.py tools/grep.py --doctest-modules --cov=tools --cov-branch --cov-report=term-missing
 
       - name: Coverage report
         run: |
           python -m coverage report -m
+          python -m coverage xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
 
   

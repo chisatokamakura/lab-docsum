@@ -15,15 +15,12 @@ def ls(folder=None):
     '''
     This function behaves just like the ls program in the shell.
 
-    >>> ls()
-    'README.md __pycache__ bad_encoding.bin build chat.py
-    cmc_cs040_chisatokamakura.egg-info dist htmlcov pyproject.toml
-    requirements.txt test_utf16.txt tools tutorial.py venv'
-    >>> ls('tools')
-    'tools/__pycache__ tools/calculate.py tools/cat.py
-    tools/grep.py tools/ls.py'
-
-
+    >>> 'chat.py' in ls()
+    True
+    >>> 'tools' in ls()
+    True
+    >>> 'tools/cat.py' in ls('tools')
+    True
     '''
 
     result = ''

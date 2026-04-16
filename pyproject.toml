@@ -17,7 +17,7 @@ dependencies = [
 chat = "chat:repl"
 
 [tool.flake8]
-exclude = ["venv", ".venv", "__pycache__"]
+exclude = ["venv", ".venv", "__pycache__", "build", "test_projects"]
 
 [tool.setuptools]
 py-modules = ["chat"]
