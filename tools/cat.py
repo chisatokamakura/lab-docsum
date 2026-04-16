@@ -39,3 +39,21 @@ def cat(filename):
             return 'Error: cannot read file'
     except Exception:
         return 'Error: cannot read file'
+
+tool_schema = {
+    "type": "function",
+    "function": {
+        "name": "cat",
+        "description": "Read the contents of a file",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "type": "string",
+                    "description": "Path to the file"
+                }
+            },
+            "required": ["filename"]
+        },
+    },
+}

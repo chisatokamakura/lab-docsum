@@ -7,7 +7,10 @@ tool usage and automatic tool usage.
 import json
 import os
 from groq import Groq
-from tools.calculate import calculate, tool_schema
+from tools.calculate import calculate, tool_schema as calculate_schema
+from tools.ls import ls, tool_schema as ls_schema
+from tools.cat import cat, tool_schema as cat_schema
+from tools.grep import grep, tool_schema as grep_schema
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -43,7 +46,7 @@ class Chat:
     '''
 
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-    MODEL = "openai/gpt-oss-120b"
+    MODEL = "llama-3.1-8b-instant"
 
     def __init__(self):
         ''' Initialize Chat object with default prompt
@@ -53,7 +56,9 @@ class Chat:
                 "role": "system",
                 "content": (
                     "Write output in 1-2 sentences. Always use tools for "
-                    "tasks when appropriate. Don't bold the answer."
+                    "like ls, cat, and grep to inspect current directory."
+                    " when answering questions about files."
+                    " You will only be able to use one tool."
                     )
             }
         ]
@@ -69,7 +74,7 @@ class Chat:
             }
         )
         # define tools
-        tools = [tool_schema]
+        tools = [calculate_schema, ls_schema, cat_schema, grep_schema]
 
         # in order to make non deterministic code deterministic:
         # in this case, has a 'temperature' param that controls randomness:
@@ -93,6 +98,9 @@ class Chat:
             # Map function names to implementations
             available_functions = {
                 "calculate": calculate,
+                "ls": ls,
+                "cat": cat,
+                "grep": grep,
             }
 
             # Add the assistant's response to conversation
@@ -103,15 +111,36 @@ class Chat:
                 function_name = tool_call.function.name
                 function_to_call = available_functions[function_name]
                 function_args = json.loads(tool_call.function.arguments)
-                function_response = function_to_call(
-                    expression=function_args.get("expression")
-                )
-                print(
-                    f"[tool] function_name={function_name}, "
-                    f"function_args={function_args}"
-                    )
+                if function_args is None: 
+                    function_args = {}
+                
+                # print('function_name=', function_name)
+                # print('function_args=', function_args)
+
+                if function_name == "calculate":
+                        function_response = function_to_call(
+                            expression=function_args.get("expression")
+                        )
+                elif function_name == "ls":
+                        function_response = function_to_call(
+                            folder=function_args.get("folder")
+                        )
+                elif function_name == "cat":
+                        function_response = function_to_call(
+                            filepath=function_args.get("filename")
+                        )
+                elif function_name == "grep":
+                        function_response = function_to_call(
+                            pattern=function_args.get("pattern"),
+                            path=function_args.get("path")
+                        )
+                # print(
+                    # f"[tool] function_name={function_name}, "
+                    # f"function_args={function_args}"
+                    # )
 
                 # Add tool response to conversation
+                # print('function_response=', function_response)
                 self.messages.append({
                     "tool_call_id": tool_call.id,
                     "role": "tool",
@@ -121,12 +150,15 @@ class Chat:
 
             # Step 4: Get final response from model
             second_response = self.client.chat.completions.create(
-                model='openai/gpt-oss-120b',
+                model=self.MODEL,
                 messages=self.messages,
                 temperature=temperature,
-                seed=0
+                seed=0,
+                tools=tools,
+                tool_choice="none",
             )
             result = second_response.choices[0].message.content
+            # print('result=', result)
             self.messages.append({
                 'role': 'assistant',
                 'content': result

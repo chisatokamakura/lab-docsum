@@ -53,3 +53,25 @@ def grep(pattern, path):
         return ''
 
     return result
+
+tool_schema = {
+    "type": "function",
+    "function": {
+        "name": "grep",
+        "description": "Search for a pattern in a file",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "pattern": {
+                    "type": "string",
+                    "description": "Text to search for"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "File to search in"
+                }
+            },
+            "required": ["pattern", "path"]
+        },
+    },
+}

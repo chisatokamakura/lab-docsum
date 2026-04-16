@@ -22,11 +22,8 @@ def ls(folder=None):
     >>> 'tools/cat.py' in ls('tools')
     True
     '''
-
     result = ''
-    # folder + '/' ==> tools
-    # glob is non deterministic; no guarantee about order of glob results
-    # need to convert nondeterministic to deterministic
+
     if folder:
         for path in sorted(glob.glob(folder + '/*')):
             result += path + ' '
@@ -34,3 +31,22 @@ def ls(folder=None):
         for path in sorted(glob.glob('*')):
             result += path + ' '
     return result.strip()
+
+
+tool_schema = {
+    "type": "function",
+    "function": {
+        "name": "ls",
+        "description": "List files in a directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "folder": {
+                    "type": "string",
+                    "description": "Optional folder to list"
+                }
+            },
+            "required": []
+        },
+    },
+}

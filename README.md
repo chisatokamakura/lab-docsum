@@ -27,8 +27,8 @@ This example is good because it shows how the model can analyze a website projec
 ```
 $ cd test_projects/chisatokamakura.github.io
 $ chat
-chat> what is in this project?
-This project contains several HTML pages such as index.html, men.html, pairs.html, and icedance.html, along with a style.css file and many image assets. It appears to be a multi-page website with structured content and styling.
+chat> what files are in this project?
+The project contains the following files: README.md, aljonaandbruno.jpg, anna.jpg, gabbiandgui.jpg, hanyu.jpg, icedance.html, index.html, javi.jpeg, kaori.jpg, mao.jpg, men.html, milanmascot.png, pairs.html, shoma.jpg, style.css, suiandhan.jpg, virtuemoir.jpg, and women.html.
 ```
 
 ### Markdown Project
@@ -38,20 +38,17 @@ This example is good because it shows how the model can analyze a code-based pro
 ```
 $ cd test_projects/project01
 $ chat
-chat> what is in this project?
-This project contains a markdown compiler implementation along with supporting files such as a README, configuration files (pyproject.toml and requirements.txt), and example outputs including screenshots demonstrating styling behavior.
+chat> how many files are in this project?
+There are 8 files in this project.
 ```
 
 ### Webscraping Project
 
-This is a good example because it shows how the model can interpret multiple types of files and reason about their properties and functionality.
-
+This is a good example because it shows how the model can interpret multiple types of files
+from an external webpage.
 ```
 $ cd test_projects/project02_webscraping
 $ chat
-chat> tell me about this project
-This project appears to scrape product data from eBay listings and store the results in structured formats like CSV and JSON.
-
-chat> what kind of data does it collect?
-The project includes multiple CSV and JSON files, suggesting it collects and stores product information such as listings for items such as cameras, sweaters, and typewriters.
+chat> chat> is the requests lib used in this project?
+No, the requests library does not appear to be used in this project, as there are no files suggesting its use.
 ```
