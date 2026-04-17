@@ -16,6 +16,10 @@ def grep(pattern, path):
     >>> grep('this_is_not_match', __file__)
     ''
 
+    # these functions are fully deterministic;
+    # it would be better to actually list their full output
+    # so that other users can see what the function is
+    # supposed to do
     >>> 'import re' in grep('import re', 'tools/grep.py')
     True
 
@@ -28,6 +32,9 @@ def grep(pattern, path):
     >>> grep('anything', None)
     ''
 
+    # rather than creating a file within the doctests,
+    # it is cleaner/better to just add whatever files
+    # you need into the repo and run on that file
     >>> with open('bad_encoding.bin', 'wb') as f:
     ...     _ = f.write(bytes([255]))
     >>> grep('anything', 'bad_encoding.bin')

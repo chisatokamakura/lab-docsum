@@ -27,6 +27,7 @@ class Chat:
     calling of tools if needed, and returns the response.
     It also stores message history.
 
+    # these are all pretty decent tests for something nondeterministic
     >>> chat = Chat()
     >>> _ = chat.send_message('my name is Bob', temperature=0.0)
     >>> result = chat.send_message('what is my name?', temperature=0.0)
@@ -73,6 +74,7 @@ class Chat:
                     "like ls, cat, and grep to inspect current directory."
                     " when answering questions about files."
                     " You will only be able to use one tool."
+                    # it is better to put tool-based instructions in the actual tool schema than the system prompt.
                     "Use the calculate tool only for valid "
                     "mathematical expressions "
                     "such as '2 + 2' or '5 * (3 - 1)'. "
@@ -91,8 +93,8 @@ class Chat:
         '''Send a message to the language model and return response.'''
         self.messages.append(
             {
-                # system: never change; user: changes a lot
-                # the message that you are sending to the AI
+                # I just recommend deleting comments that aren't directly related to the code;
+                # I understand why you had it though
                 'role': 'user',
                 'content': message
             }
@@ -104,9 +106,10 @@ class Chat:
         # in this case, has a 'temperature' param that controls randomness:
         # the higher the value, the more randomness;
         # higher temperature = more creativity
+
+        # your code isn't able to do the multi-rounds of tool calls because this call right here is not inside of a for loop
         chat_completion = self.client.chat.completions.create(
             messages=self.messages,
-            # model="llama-3.1-8b-instant",
             model=self.MODEL,
             temperature=temperature,
             seed=0,
@@ -116,6 +119,14 @@ class Chat:
 
         response_message = chat_completion.choices[0].message
         tool_calls = response_message.tool_calls
+
+        # these step comments are the exact right way
+        # to comment code and makes your code look
+        # like it's written by someone who knows what
+        # they're doing; it'll make the code easier
+        # for you to maintain over a long time and
+        # easier for other people / AIs to understand
+        # you code; nice job!
 
         # Step 2: Check if the model wants to call tools
         if tool_calls:
@@ -143,49 +154,10 @@ class Chat:
                     "name": function_name,
                     "content": function_response,
                 })
-            '''
-            for tool_call in tool_calls:
-                function_name = tool_call.function.name
-                function_to_call = available_functions[function_name]
-                function_args = json.loads(tool_call.function.arguments)
-                if function_args is None: # pragma: no cover
-                    function_args = {}
-
-                # print('function_name=', function_name)
-                # print('function_args=', function_args)
-
-                if function_name == "calculate":
-                    function_response = function_to_call(
-                        expression=function_args.get("expression")
-                        )
-                elif function_name == "ls":
-                    function_response = function_to_call(
-                        folder=function_args.get("folder")
-                        )
-                elif function_name == "cat":
-                    function_response = function_to_call(
-                        filename=function_args.get("filename")
-                        )
-                elif function_name == "grep":
-                    function_response = function_to_call(
-                        pattern=function_args.get("pattern"),
-                        path=function_args.get("path")
-                        )
-                # print(
-                    # f"[tool] function_name={function_name}, "
-                    # f"function_args={function_args}"
-                    # )
-
-                # Add tool response to conversation
-                # print('function_response=', function_response)
-            self.messages.append({
-                "tool_call_id": tool_call.id,
-                "role": "tool",
-                "name": function_name,
-                "content": function_response,
-            })
-            '''
-
+                # you shouldn't include "dead code"
+                # it's useful to keep while debuging
+                # but not good to have in "published" code
+            
             # Step 4: Get final response from model
             second_response = self.client.chat.completions.create(
                 model=self.MODEL,
@@ -209,9 +181,6 @@ class Chat:
             })
         return result
 
-# this makes the user interface nicer by saying 'chat>'
-# repl: reads input and evaluates input
-
 
 def repl(temperature=0.8):
     '''
@@ -231,7 +200,11 @@ def repl(temperature=0.8):
     >>> builtins.input = monkey_input
     >>> repl(temperature=0.0) # doctest: +ELLIPSIS
     chat> /ls tools
-    ...
+    the ... here is not good;
+    these tools are all fully deterministic,
+    and so there's no reason not actually show the output
+    the whole purpose of doctests is to let other people
+    know what your code outputs
     <BLANKLINE>
 
     >>> def monkey_input(prompt, user_inputs=['/cat tools/ls.py']):
@@ -449,10 +422,11 @@ def repl(temperature=0.8):
 
 
 def main():
+    # it's better to use argparse than to manually parse the sys.argv list
     if len(sys.argv) > 1:
         message = ' '.join(sys.argv[1:])
         chat = Chat()
-        print(chat.send_message(message, temperature=0.0))
+        print(chat.send_message(message)) # only temp=0 in test cases
     else:
         repl()
 

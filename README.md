@@ -8,21 +8,15 @@
 
 This project is a command-line LLM assistant. It contains a variety of tools that is able to be called both automatically and manually.
 
-## This project demonstrates: 
+<!-- deleted so that it looks less like school project and because link already in your PyPI badge above -->
 
-1. How to write "test cases for your test cases"
-2. How to get LLMs working in github actions
-3. How to let other people "pip install" your projects
-
-Link to my PYPI project: https://pypi.org/project/cmc-cs040-chisatokamakura/
-
-## Animated GIF Demo: 
+Anytime you have a figure/code block, write a sentence introducing it.
 
 ![Demo of lab-docsum](images/demo.gif)
 
-### Webpage Project
+## Examples
 
-This example is good because it shows how the model can analyze a website project and its structure, identifying individual files that include HTML files, styling files, and images.
+This example shows how the model can analyze a website project and its structure, identifying individual files that include HTML files, styling files, and images.
 
 ```
 $ cd test_projects/chisatokamakura.github.io
@@ -31,9 +25,7 @@ chat> what files are in this project?
 The project contains the following files: README.md, aljonaandbruno.jpg, anna.jpg, gabbiandgui.jpg, hanyu.jpg, icedance.html, index.html, javi.jpeg, kaori.jpg, mao.jpg, men.html, milanmascot.png, pairs.html, shoma.jpg, style.css, suiandhan.jpg, virtuemoir.jpg, and women.html.
 ```
 
-### Markdown Project
-
-This example is good because it shows how the model can analyze the structure of a code-based project, determining properties such as the number of files contained.
+This shows how the model can analyze the structure of a code-based project, determining properties such as the number of files contained.
 
 ```
 $ cd test_projects/project01
@@ -42,9 +34,7 @@ chat> how many files are in this project?
 There are 8 files in this project.
 ```
 
-### Webscraping Project
-
-This is a good example because it shows how the model inspect the files used in the project and determine if specific libraries are used by searching for relevant files.
+This example shows how the model inspect the files used in the project and determine if specific libraries are used by searching for relevant files.
 ```
 $ cd test_projects/project02_webscraping
 $ chat
@@ -52,12 +42,10 @@ chat> chat> is the requests lib used in this project?
 No, the requests library does not appear to be used in this project, as there are no files suggesting its use.
 ```
 
-### Extra Credit: 
+### More examples
 
 My program can optionally take a command line argument that is a message and pass it to the LLM. 
 ```
 $ chat 'what files are in test_projects?'
 The files in the test_projects directory are test_projects/chisatokamakura.github.io, test_projects/project01, and test_projects/project02_webscraping.
-$ chat
-chat> 
-```  
+```
