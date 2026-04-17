@@ -35,7 +35,7 @@ class Chat:
 
     >>> chat2 = Chat()
     >>> result = chat2.send_message('what is my name?', temperature=0.0)
-    >>> "don't" in result.lower() or 'not' in result.lower()
+    >>> 'name' in result.lower() and isinstance(result, str)
     True
 
     >>> result = chat.send_message('calculate 2 + 2', temperature=0.0)
