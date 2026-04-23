@@ -15,8 +15,8 @@ from tools.cat import cat, tool_schema as cat_schema
 from tools.grep import grep, tool_schema as grep_schema
 from tools.doctests import doctests, tool_schema as doctests_schema
 from tools.rm import tool_schema as rm_schema
-from tools.write_file import tool_schema as write_file_schema
-from tools.write_files import tool_schema as write_files_schema
+from tools.write_file import write_file, tool_schema as write_file_schema
+from tools.write_files import write_files, tool_schema as write_files_schema
 
 from dotenv import load_dotenv
 load_dotenv()
