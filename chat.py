@@ -14,7 +14,7 @@ from tools.ls import ls, tool_schema as ls_schema
 from tools.cat import cat, tool_schema as cat_schema
 from tools.grep import grep, tool_schema as grep_schema
 from tools.doctests import doctests, tool_schema as doctests_schema
-from tools.rm import tool_schema as rm_schema
+from tools.rm import rm, tool_schema as rm_schema
 from tools.write_file import write_file, tool_schema as write_file_schema
 from tools.write_files import write_files, tool_schema as write_files_schema
 
