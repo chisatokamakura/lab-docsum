@@ -19,3 +19,29 @@ def write_file(path, contents, commit_message):
         [{'path': path, 'contents': contents}],
         commit_message
     )
+
+tool_schema = {
+    "type": "function",
+    "function": {
+        "name": "write_file",
+        "description": "Write one file.\nCommit it with git and run doctests if it is a Python file.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "The path of the file to write."
+                },
+                "contents": {
+                    "type": "string",
+                    "description": "The contents to write into the file."
+                },
+                "commit_message": {
+                    "type": "string",
+                    "description": "The git commit message to use."
+                }
+            },
+            "required": ["path", "contents", "commit_message"]
+        }
+    }
+}

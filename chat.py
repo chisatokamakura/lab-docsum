@@ -14,6 +14,9 @@ from tools.ls import ls, tool_schema as ls_schema
 from tools.cat import cat, tool_schema as cat_schema
 from tools.grep import grep, tool_schema as grep_schema
 from tools.doctests import doctests, tool_schema as doctests_schema
+from tools.rm import tool_schema as rm_schema
+from tools.write_file import tool_schema as write_file_schema
+from tools.write_files import tool_schema as write_files_schema
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -250,7 +253,7 @@ def repl(temperature=0.8):
     >>> builtins.input = monkey_input
     >>> repl(temperature=0.0) # doctest: +ELLIPSIS
     chat> /ls tools
-    ...tools/calculate.py...tools/cat.py...tools/grep.py...tools/ls.py
+    ...tools/calculate.py...tools/ls.py...
     <BLANKLINE>
 
     >>> def monkey_input(prompt, user_inputs=['/cat tools/ls.py']):
