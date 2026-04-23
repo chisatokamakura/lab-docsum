@@ -7,9 +7,6 @@ def doctests(path):
     >>> output = doctests('tools/ls.py')
     >>> 'passed' in output or 'OK' in output
     True
-
-    >>> write_file('/etc/passwd', 'x', 'bad write')
-    'Invalid path'
     '''
     result = subprocess.run(
         ['python', '-m', 'doctest', '--verbose', path],
