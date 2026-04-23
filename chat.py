@@ -82,6 +82,7 @@ class Chat:
                 "content": (
                     "Write output in 1-2 sentences. Always use tools for "
                     "like ls, cat, and grep when helpful to inspect files. "
+                    "Only use one tool."
                     "After receiving tool results, answer the"
                     " user's question in natural language."
                     " Do not repeat raw tool output exactly "
@@ -134,6 +135,7 @@ class Chat:
         # calls because this call right here is not inside of a for loop
         for i in range(10):
             # ask model
+            print('self.messages=', self.messages)
             chat_completion = self.client.chat.completions.create(
                 messages=self.messages,
                 model=self.MODEL,
