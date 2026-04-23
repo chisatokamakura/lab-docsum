@@ -71,7 +71,8 @@ class Chat:
     '''
 
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-    MODEL = "llama-3.3-70b-versatile"
+    # MODEL = "llama-3.3-70b-versatile"
+    MODEL = "llama-3.1-8b-instant"
 
     def __init__(self):
         ''' Initialize Chat object with default prompt
@@ -112,6 +113,8 @@ class Chat:
             }
         )
 
+        # tools = [calculate_schema, ls_schema, cat_schema, grep_schema,
+                # doctests_schema, rm_schema, write_file_schema, write_files_schema]
         tools = [calculate_schema, ls_schema, cat_schema, grep_schema,
                 doctests_schema, rm_schema, write_file_schema, write_files_schema]
 
@@ -136,6 +139,7 @@ class Chat:
         for i in range(10):
             # ask model
             print('self.messages=', self.messages)
+            print('tools=', tools)
             chat_completion = self.client.chat.completions.create(
                 messages=self.messages,
                 model=self.MODEL,
