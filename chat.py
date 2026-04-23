@@ -81,16 +81,7 @@ class Chat:
                 "role": "system",
                 "content": (
                     "Write output in 1-2 sentences. Always use tools for "
-                    "like ls, cat, and grep to inspect current directory."
-                    " when answering questions about files."
-                    " You will only be able to use one tool."
-                    # it is better to put tool-based instructions
-                    # in the actual tool schema than the system prompt.
-                    "Use the calculate tool only for valid "
-                    "mathematical expressions "
-                    "such as '2 + 2' or '5 * (3 - 1)'. "
-                    "Do not use calculate for names, memory questions, "
-                    "or general conversation. "
+                    "like ls, cat, and grep when helpful to inspect files. "
                     "After receiving tool results, answer the"
                     " user's question in natural language."
                     " Do not repeat raw tool output exactly "
