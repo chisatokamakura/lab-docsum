@@ -55,7 +55,7 @@ class Chat:
 
     >>> chat3 = Chat()
     >>> result = chat3.send_message(
-    ...     'Use your cat tool to read tools/ls.py',
+    ...     'What is in tools/ls.py?',
     ...     temperature=0.0
     ... )
     >>> 'This file contains' in result or 'ls' in result.lower()
@@ -161,10 +161,7 @@ class Chat:
                 # use tools if they were called
                 function_name = tool_call.function.name
                 function_to_call = available_functions[function_name]
-                if tool_call.function.arguments:
-                    function_args = json.loads(tool_call.function.arguments)
-                else:
-                    function_args = {}
+                function_args = json.loads(tool_call.function.arguments) if tool_call.function.arguments else {}
                 function_response = function_to_call(**function_args)
 
                 self.messages.append({
