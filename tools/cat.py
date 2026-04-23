@@ -51,7 +51,7 @@ tool_schema = {
             "properties": {
                 "filename": {
                     "type": "string",
-                    "description": "Path to the file"
+                    "description": "The path to the file"
                 }
             },
             "required": ["filename"]

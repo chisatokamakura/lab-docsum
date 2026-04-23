@@ -6,12 +6,14 @@ tool usage and automatic tool usage.
 
 import json
 import os
+import sys
 import argparse
 from groq import Groq
 from tools.calculate import calculate, tool_schema as calculate_schema
 from tools.ls import ls, tool_schema as ls_schema
 from tools.cat import cat, tool_schema as cat_schema
 from tools.grep import grep, tool_schema as grep_schema
+from tools.doctests import doctests, tool_schema as doctests_schema
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -26,6 +28,11 @@ class Chat:
     It sends user input to the GROQ API, handles the
     calling of tools if needed, and returns the response.
     It also stores message history.
+
+    Because LLMs are non-deterministic, the doctests
+    below do not show the full output of the LLM.
+    We simply assert that the model's response includes
+    the name 'Bob' if the conversation has already mentioned the name.
 
     # these are all pretty decent tests for something nondeterministic
     >>> chat = Chat()
@@ -90,6 +97,17 @@ class Chat:
             }
         ]
 
+        if not os.path.isdir(".git"):
+            print("Error: Not inside a git repository.")
+            sys.exit(1)
+
+        if os.path.isfile("AGENTS.md"):
+            content = cat("AGENTS.md")
+            self.messages.append({
+                "role": "system",
+                "content": content
+            })
+
     def send_message(self, message, temperature=0.8):
         '''Send a message to the language model and return response.'''
         self.messages.append(
@@ -99,13 +117,18 @@ class Chat:
             }
         )
 
-        tools = [calculate_schema, ls_schema, cat_schema, grep_schema]
+        tools = [calculate_schema, ls_schema, cat_schema, grep_schema,
+                doctests_schema, rm_schema, write_file_schema, write_files_schema]
 
         available_functions = {
                 "calculate": calculate,
                 "ls": ls,
                 "cat": cat,
                 "grep": grep,
+                "doctests": doctests,
+                "write_file": write_file,
+                "write_files": write_files,
+                "rm": rm,
             }
 
         # in order to make non deterministic code deterministic:
