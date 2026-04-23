@@ -58,7 +58,7 @@ class Chat:
     ...     'What is in tools/ls.py?',
     ...     temperature=0.0
     ... )
-    >> 'This file contains' in result or 'ls' in result.lower()
+    >>> 'This file contains' in result or 'ls' in result.lower()
     True
 
     >>> chat4 = Chat()
@@ -66,7 +66,7 @@ class Chat:
     ...     'Use your grep tool to search for import in tools/grep.py',
     ...     temperature=0.0
     ... )
-    >> 'import' in result.lower()
+    >>> 'import' in result.lower()
     True
     '''
 
@@ -250,7 +250,9 @@ def repl(temperature=0.8):
     >>> builtins.input = monkey_input
     >>> repl(temperature=0.0) # doctest: +ELLIPSIS
     chat> /ls tools
-    ...tools/calculate.py...tools/ls.py...
+    tools/__init__.py tools/__pycache__ tools/calculate.py
+    tools/cat.py tools/doctests.py tools/grep.py
+    tools/ls.py tools/rm.py tools/write_file.py tools/write_files.py
     <BLANKLINE>
 
     >>> def monkey_input(prompt, user_inputs=['/cat tools/ls.py']):
