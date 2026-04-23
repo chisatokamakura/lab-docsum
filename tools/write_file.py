@@ -1,13 +1,14 @@
 '''
-This tool writes contents to a file, commits the change with git. 
+This tool writes contents to a file, commits the change with git.
 If it is a Python file, runs doctests and returns output.
 '''
 
 from tools.write_files import write_files
 
+
 def write_file(path, contents, commit_message):
     '''
-    Write one file, commit it with git, and run doctests if it is a Python file.
+    Write one file, commit with git, and run doctests if it is a Python file.
 
     >>> isinstance(write_file('tmp.txt', 'hello', 'add tmp'), str)
     True
@@ -16,15 +17,24 @@ def write_file(path, contents, commit_message):
     'Invalid path'
     '''
     return write_files(
-        [{'path': path, 'contents': contents}],
-        commit_message
+        [
+            {
+                'path': path,
+                'contents': contents,
+            }
+        ],
+        commit_message,
     )
+
 
 tool_schema = {
     "type": "function",
     "function": {
         "name": "write_file",
-        "description": "Write one file.\nCommit it with git and run doctests if it is a Python file.",
+        "description": (
+            "Write one file.\n"
+            "Commit it with git and run doctests if it is a Python file."
+        ),
         "parameters": {
             "type": "object",
             "properties": {

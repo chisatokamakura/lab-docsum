@@ -27,7 +27,11 @@ def write_files(files, commit_message):
             path = file_info['path']
             contents = file_info['contents']
 
-            if not isinstance(path, str) or os.path.isabs(path) or '..' in path:
+            if (
+                not isinstance(path, str)
+                or os.path.isabs(path)
+                or '..' in path
+            ):
                 return 'Invalid path'
 
             with open(path, 'w', encoding='utf-8') as f:
@@ -48,7 +52,10 @@ def write_files(files, commit_message):
         if python_outputs:
             return '\n'.join(python_outputs)
 
-        return f'Wrote {len(files)} file(s) and committed with message: [docchat] {commit_message}'
+        return (
+            f'Wrote {len(files)} file(s) and committed with message: '
+            f'[docchat] {commit_message}'
+        )
 
     except Exception as e:
         return f'Error: {e}'
@@ -58,7 +65,10 @@ tool_schema = {
     "type": "function",
     "function": {
         "name": "write_files",
-        "description": "Write multiple files.\nCommit them with git and run doctests on Python files.",
+        "description": (
+            "Write multiple files.\n"
+            "Commit them with git and run doctests on Python files."
+        ),
         "parameters": {
             "type": "object",
             "properties": {
@@ -70,11 +80,15 @@ tool_schema = {
                         "properties": {
                             "path": {
                                 "type": "string",
-                                "description": "The path of the file to write."
+                                "description": (
+                                    "The path of the file to write."
+                                )
                             },
                             "contents": {
                                 "type": "string",
-                                "description": "The contents to write into the file."
+                                "description": (
+                                    "The contents to write into the file."
+                                )
                             }
                         },
                         "required": ["path", "contents"]

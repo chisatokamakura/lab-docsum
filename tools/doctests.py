@@ -1,5 +1,6 @@
 import subprocess
 
+
 def doctests(path):
     '''
     Run doctests on the given file with --verbose and return the output.
@@ -14,6 +15,7 @@ def doctests(path):
         text=True
     )
     return result.stdout + result.stderr
+
 
 tool_schema = {
     "type": "function",

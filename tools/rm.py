@@ -10,7 +10,8 @@ from git import Repo
 
 def rm(path):
     '''
-    Remove one or more files using a path or glob pattern, then commit the change.
+    This tool removes one or more files using a
+    path or glob pattern, then commits the change.
 
     >>> with open('tmp_rm1.txt', 'w', encoding='utf-8') as f:
     ...     _ = f.write('hello')
@@ -62,7 +63,10 @@ def rm(path):
         repo.git.add(all=True)
         repo.index.commit(f'[docchat] rm {path}')
 
-        return f"Removed {len(removed_files)} file(s): {', '.join(removed_files)}"
+        return (
+            f"Removed {len(removed_files)} file(s): "
+            f"{', '.join(removed_files)}"
+        )
 
     except Exception as e:
         return f'Error: {e}'
@@ -72,7 +76,10 @@ tool_schema = {
     "type": "function",
     "function": {
         "name": "rm",
-        "description": "Remove one or more files using a path or glob.\nCommit the deletion with git.",
+        "description": (
+            "Remove one or more files using a path or glob.\n"
+            "Commit deletion with git."
+        ),
         "parameters": {
             "type": "object",
             "properties": {

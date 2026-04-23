@@ -114,9 +114,17 @@ class Chat:
         )
 
         # tools = [calculate_schema, ls_schema, cat_schema, grep_schema,
-                # doctests_schema, rm_schema, write_file_schema, write_files_schema]
-        tools = [calculate_schema, ls_schema, cat_schema, grep_schema,
-                doctests_schema, rm_schema, write_file_schema, write_files_schema]
+        # doctests_schema, rm_schema, write_file_schema, write_files_schema]
+        tools = [
+            calculate_schema,
+            ls_schema,
+            cat_schema,
+            grep_schema,
+            doctests_schema,
+            rm_schema,
+            write_file_schema,
+            write_files_schema,
+        ]
 
         available_functions = {
                 "calculate": calculate,
@@ -167,7 +175,10 @@ class Chat:
                 # use tools if they were called
                 function_name = tool_call.function.name
                 function_to_call = available_functions[function_name]
-                function_args = json.loads(tool_call.function.arguments) if tool_call.function.arguments else {}
+                if tool_call.function.arguments:
+                    function_args = json.loads(tool_call.function.arguments)
+                else:
+                    function_args = {}
                 function_response = function_to_call(**function_args)
 
                 self.messages.append({
@@ -239,7 +250,7 @@ def repl(temperature=0.8):
     returns the model's response.
 
     # doctests for manual LLM calls
-    >>> def monkey_input(prompt, user_inputs=['/ls test_projects']):
+    >>> def monkey_input(prompt, user_inputs=['/ls images']):
     ...     try:
     ...         user_input = user_inputs.pop(0)
     ...         print(f'{prompt}{user_input}')
@@ -249,8 +260,8 @@ def repl(temperature=0.8):
     >>> import builtins
     >>> builtins.input = monkey_input
     >>> repl(temperature=0.0) # doctest: +ELLIPSIS
-    chat> /ls test_projects
-    test_projects/chisatokamakura.github.io test_projects/project01 test_projects/project02_webscraping
+    chat> /ls images
+    images/demo.gif
     <BLANKLINE>
 
     >>> def monkey_input(prompt, user_inputs=['/cat tools/ls.py']):
