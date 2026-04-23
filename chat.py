@@ -161,7 +161,10 @@ class Chat:
                 # use tools if they were called
                 function_name = tool_call.function.name
                 function_to_call = available_functions[function_name]
-                function_args = json.loads(tool_call.function.arguments)
+                if tool_call.function.arguments:
+                    function_args = json.loads(tool_call.function.arguments)
+                else:
+                    function_args = {}
                 function_response = function_to_call(**function_args)
 
                 self.messages.append({
