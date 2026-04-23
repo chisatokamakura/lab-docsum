@@ -53,12 +53,12 @@ class Chat:
     >>> '4' in result or 'result' in result
     True
 
-    >>> chat3 = Chat()
-    >>> result = chat3.send_message(
-    ...     'What is in tools/ls.py?',
+    >> chat3 = Chat()
+    >> result = chat3.send_message(
+    ..     'What is in tools/ls.py?',
     ...     temperature=0.0
     ... )
-    >>> 'This file contains' in result or 'ls' in result.lower()
+    >> 'This file contains' in result or 'ls' in result.lower()
     True
 
     >>> chat4 = Chat()
