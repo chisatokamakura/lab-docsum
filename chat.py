@@ -61,12 +61,12 @@ class Chat:
     >> 'This file contains' in result or 'ls' in result.lower()
     True
 
-    >>> chat4 = Chat()
-    >>> result = chat4.send_message(
+    >> chat4 = Chat()
+    >> result = chat4.send_message(
     ...     'Use your grep tool to search for import in tools/grep.py',
     ...     temperature=0.0
     ... )
-    >>> 'import' in result.lower()
+    >> 'import' in result.lower()
     True
     '''
 
