@@ -239,7 +239,7 @@ def repl(temperature=0.8):
     returns the model's response.
 
     # doctests for manual LLM calls
-    >>> def monkey_input(prompt, user_inputs=['/ls tools']):
+    >>> def monkey_input(prompt, user_inputs=['/ls test_projects']):
     ...     try:
     ...         user_input = user_inputs.pop(0)
     ...         print(f'{prompt}{user_input}')
