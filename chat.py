@@ -249,10 +249,8 @@ def repl(temperature=0.8):
     >>> import builtins
     >>> builtins.input = monkey_input
     >>> repl(temperature=0.0) # doctest: +ELLIPSIS
-    chat> /ls tools
-    tools/__init__.py tools/__pycache__ tools/calculate.py
-    tools/cat.py tools/doctests.py tools/grep.py
-    tools/ls.py tools/rm.py tools/write_file.py tools/write_files.py
+    chat> /ls test_projects
+    test_projects/chisatokamakura.github.io test_projects/project01 test_projects/project02_webscraping
     <BLANKLINE>
 
     >>> def monkey_input(prompt, user_inputs=['/cat tools/ls.py']):
