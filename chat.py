@@ -138,8 +138,8 @@ class Chat:
         # calls because this call right here is not inside of a for loop
         for i in range(10):
             # ask model
-            print('self.messages=', self.messages)
-            print('tools=', tools)
+            # print('self.messages=', self.messages)
+            # print('tools=', tools)
             chat_completion = self.client.chat.completions.create(
                 messages=self.messages,
                 model=self.MODEL,
