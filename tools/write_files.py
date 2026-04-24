@@ -47,12 +47,13 @@ def write_files(files, commit_message):
                 doctests(path)  # run silently
 
         if len(files) == 1:
-            return f"Created the file {files[0]['path']}"
+            return f"Wrote the file {files[0]['path']}"
 
         return f"Wrote {len(files)} files"
 
     except Exception as e:
         return f'Error: {e}'
+
 
 tool_schema = {
     "type": "function",
