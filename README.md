@@ -40,12 +40,20 @@ chat> chat> is the requests lib used in this project?
 No, the requests library does not appear to be used in this project, as there are no files suggesting its use.
 ```
 
-### More examples
+## More examples
 
 My program can optionally take a command line argument that is a message and pass it to the LLM. 
 ```
 $ chat 'what files are in test_projects?'
 The files in the test_projects directory are test_projects/chisatokamakura.github.io, test_projects/project01, and test_projects/project02_webscraping.
+```
+
+My program also allows the agent to install a Python library, enabling it to modify its own environment. However, it is restricted to a predefined whitelist of approved libraries, preventing arbitrary code execution.
+
+```
+>>> from tools.pip_install import pip_install
+>>> print(pip_install("not-real-package"))
+Invalid library
 ```
 
 ### Agent in Action
@@ -122,3 +130,4 @@ dist                                    tools
 htmlcov                                 venv
 images
 ```
+
