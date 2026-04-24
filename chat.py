@@ -85,6 +85,7 @@ class Chat:
                     "Always use tools "
                     "like ls, cat, and grep when helpful to inspect files. "
                     "Only use one tool."
+                    "Never write tool calls using <function=...> syntax."
                     " Never use absolute paths or paths containing .. ."
                     "After receiving tool results, respond with a short, "
                     " direct sentence describing the result."
@@ -149,14 +150,17 @@ class Chat:
             # ask model
             # print('self.messages=', self.messages)
             # print('tools=', tools)
-            chat_completion = self.client.chat.completions.create(
-                messages=self.messages,
-                model=self.MODEL,
-                temperature=temperature,
-                seed=0,
-                tools=tools,
-                tool_choice="auto"
-            )
+            try:
+                chat_completion = self.client.chat.completions.create(
+                    messages=self.messages,
+                    model=self.MODEL,
+                    temperature=temperature,
+                    seed=0,
+                    tools=tools,
+                    tool_choice="auto"
+                )
+            except Exception:
+                return "Error: tool call failed"
 
             response_message = chat_completion.choices[0].message
             # check for what tool it calls
