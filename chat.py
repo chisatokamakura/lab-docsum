@@ -36,7 +36,7 @@ class Chat:
     Because LLMs are non-deterministic, the doctests
     below do not show the full output of the LLM.
     We simply assert that the model's response includes
-    the name 'Bob' if the conversation has already mentioned the name.
+    the correct output type.
 
     # these are all pretty decent tests for something nondeterministic
     >>> chat = Chat()
@@ -67,6 +67,22 @@ class Chat:
     ...     'Use your grep tool to search for import in tools/grep.py',
     ...     temperature=0.0
     ... )
+    >>> isinstance(result, str)
+    True
+
+    >>> result = chat.send_message('run doctests on tools/ls.py', temperature=0.0)
+    >>> isinstance(result, str)
+    True
+
+    >>> result = chat.send_message('write hello.py with print hello', temperature=0.0)
+    >>> isinstance(result, str)
+    True
+
+    >>> result = chat.send_message('write files a.txt and b.txt', temperature=0.0)
+    >>> isinstance(result, str)
+    True
+
+    >>> result = chat.send_message('remove hello.py', temperature=0.0)
     >>> isinstance(result, str)
     True
     '''
