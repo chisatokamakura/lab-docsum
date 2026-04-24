@@ -20,8 +20,6 @@ def write_files(files, commit_message):
     ... )
     'Invalid path'
     '''
-    python_outputs = []
-
     try:
         for file_info in files:
             path = file_info['path']
@@ -46,20 +44,15 @@ def write_files(files, commit_message):
         for file_info in files:
             path = file_info['path']
             if path.endswith('.py'):
-                python_outputs.append(f'=== {path} ===')
-                python_outputs.append(doctests(path))
+                doctests(path)  # run silently
 
-        if python_outputs:
-            return '\n'.join(python_outputs)
+        if len(files) == 1:
+            return f"Created the file {files[0]['path']}"
 
-        return (
-            f'Wrote {len(files)} file(s) and committed with message: '
-            f'[docchat] {commit_message}'
-        )
+        return f"Wrote {len(files)} files"
 
     except Exception as e:
         return f'Error: {e}'
-
 
 tool_schema = {
     "type": "function",

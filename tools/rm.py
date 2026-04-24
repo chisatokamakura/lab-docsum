@@ -15,8 +15,8 @@ def rm(path):
 
     >>> with open('tmp_rm1.txt', 'w', encoding='utf-8') as f:
     ...     _ = f.write('hello')
-    >>> rm('tmp_rm1.txt').startswith('Removed 1 file(s):')
-    True
+    >>> rm('tmp_rm1.txt')
+    'Removed the file tmp_rm1.txt'
     >>> os.path.exists('tmp_rm1.txt')
     False
 
@@ -24,8 +24,8 @@ def rm(path):
     ...     _ = f.write('a')
     >>> with open('tmp_rm3.txt', 'w', encoding='utf-8') as f:
     ...     _ = f.write('b')
-    >>> rm('tmp_rm*.txt').startswith('Removed 2 file(s):')
-    True
+    >>> rm('tmp_rm*.txt')
+    'Removed 2 files'
     >>> os.path.exists('tmp_rm2.txt') or os.path.exists('tmp_rm3.txt')
     False
 
@@ -63,10 +63,10 @@ def rm(path):
         repo.git.add(all=True)
         repo.index.commit(f'[docchat] rm {path}')
 
-        return (
-            f"Removed {len(removed_files)} file(s): "
-            f"{', '.join(removed_files)}"
-        )
+        if len(removed_files) == 1:
+            return f"Removed the file {removed_files[0]}"
+
+        return f"Removed {len(removed_files)} files"
 
     except Exception as e:
         return f'Error: {e}'

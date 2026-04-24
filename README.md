@@ -47,3 +47,41 @@ My program can optionally take a command line argument that is a message and pas
 $ chat 'what files are in test_projects?'
 The files in the test_projects directory are test_projects/chisatokamakura.github.io, test_projects/project01, and test_projects/project02_webscraping.
 ```
+
+### Agent in Action
+These are examples of the LLM agent in action, where it can create and delete files and create git commits.
+
+#### Creating a File
+This example demonstrates that ```chat``` can can create files when asked and these files are automatically added to the git repo.
+
+```
+$ ls
+__pycache__                             pyproject.toml
+chat.py                                 README.md
+cmc_cs040_chisatokamakura.egg-info      test_projects
+dist                                    tools
+htmlcov                                 venv
+images
+$ git log --oneline -n 3
+b3c0df5 (HEAD -> main) [docchat] Initial hello world commit
+1425b2f [docchat] Initial commit
+78814f8 [docchat] Initial commit
+$ chat
+chat> create a hello_world python file
+Created the file hello_world.py
+chat> ^C
+$ ls
+__pycache__                             images
+chat.py                                 pyproject.toml
+cmc_cs040_chisatokamakura.egg-info      README.md
+dist                                    test_projects
+hello_world.py                          tools
+htmlcov                                 venv
+$ git log --oneline -n 3
+ac3660f (HEAD -> main) [docchat] Initial hello world commit
+b3c0df5 [docchat] Initial hello world commit
+1425b2f [docchat] Initial commit
+```
+
+#### Deleting a File
+

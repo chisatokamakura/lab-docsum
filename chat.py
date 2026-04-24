@@ -82,14 +82,14 @@ class Chat:
             {
                 "role": "system",
                 "content": (
-                    "Write output in 1-2 sentences. Always use tools for "
+                    "Always use tools "
                     "like ls, cat, and grep when helpful to inspect files. "
                     "Only use one tool."
-                    "After receiving tool results, return the"
-                    " result directly. Do not rewrite or"
-                    " summarize tool output "
-                    "unless the user explicitly asks for raw output. "
-                    "Don't bold the answer."
+                    " Never use absolute paths or paths containing .. ."
+                    "After receiving tool results, respond with a short, "
+                    " direct sentence describing the result."
+                    " Do not explain how the tool works. "
+                    "Do not include extra details. "
                     )
             }
         ]
@@ -187,7 +187,42 @@ class Chat:
                     if key in valid_args
                 }
 
-                function_response = function_to_call(**function_args)
+                if function_name == "calculate":
+                    function_response = function_to_call(
+                        expression=function_args.get("expression")
+                    )
+                elif function_name == "ls":
+                    function_response = function_to_call(
+                        folder=function_args.get("folder")
+                    )
+                elif function_name == "cat":
+                    function_response = function_to_call(
+                        filename=function_args.get("filename")
+                    )
+                elif function_name == "grep":
+                    function_response = function_to_call(
+                        pattern=function_args.get("pattern"),
+                        path=function_args.get("path")
+                    )
+                elif function_name == "doctests":
+                    function_response = function_to_call(
+                        path=function_args.get("path")
+                    )
+                elif function_name == "write_file":
+                    function_response = function_to_call(
+                        path=function_args.get("path"),
+                        contents=function_args.get("contents", ""),
+                        commit_message=function_args.get("commit_message", ""),
+                    )
+                elif function_name == "write_files":
+                    function_response = function_to_call(
+                        files=function_args.get("files", []),
+                        commit_message=function_args.get("commit_message", ""),
+                    )
+                elif function_name == "rm":
+                    function_response = function_to_call(
+                        path=function_args.get("path")
+                    )
 
                 self.messages.append({
                     "tool_call_id": tool_call.id,
@@ -195,6 +230,9 @@ class Chat:
                     "name": function_name,
                     "content": function_response,
                 })
+
+                return function_response
+
         return "The model did not finish after 10 rounds."  # pragma: no cover
 
 
