@@ -1,3 +1,8 @@
+'''
+This tool writes multiple files, git adds them, commits them,
+and runs doctests on any Python files.
+'''
+
 import os
 from git import Repo
 from tools.doctests import doctests

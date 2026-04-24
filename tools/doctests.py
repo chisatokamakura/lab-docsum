@@ -1,3 +1,8 @@
+'''
+This tool runs doctests on the given file
+with --verbose and return the output.
+'''
+
 import subprocess
 
 
