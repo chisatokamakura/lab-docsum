@@ -42,7 +42,7 @@ class Chat:
     >>> chat = Chat()
     >>> _ = chat.send_message('my name is Bob', temperature=0.0)
     >>> result = chat.send_message('what is my name?', temperature=0.0)
-    >>> 'name' in result.lower()
+    >>> 'bob' in result.lower()
     True
 
     >>> chat2 = Chat()
