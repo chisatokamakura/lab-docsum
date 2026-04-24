@@ -84,9 +84,9 @@ class Chat:
                     "Write output in 1-2 sentences. Always use tools for "
                     "like ls, cat, and grep when helpful to inspect files. "
                     "Only use one tool."
-                    "After receiving tool results, answer the"
-                    " user's question in natural language."
-                    " Do not repeat raw tool output exactly "
+                    "After receiving tool results, return the"
+                    " result directly. Do not rewrite or"
+                    " summarize tool output "
                     "unless the user explicitly asks for raw output. "
                     "Don't bold the answer."
                     )
