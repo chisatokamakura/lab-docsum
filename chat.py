@@ -70,15 +70,24 @@ class Chat:
     >>> isinstance(result, str)
     True
 
-    >>> result = chat.send_message('run doctests on tools/ls.py', temperature=0.0)
+    >>> result = chat.send_message(
+    ...     'run doctests on tools/ls.py',
+    ...     temperature=0.0
+    ... )
     >>> isinstance(result, str)
     True
 
-    >>> result = chat.send_message('write hello.py with print hello', temperature=0.0)
+    >>> result = chat.send_message(
+    ...     'write hello.py with print hello',
+    ...     temperature=0.0
+    ... )
     >>> isinstance(result, str)
     True
 
-    >>> result = chat.send_message('write files a.txt and b.txt', temperature=0.0)
+    >>> result = chat.send_message(
+    ...     'write files a.txt and b.txt',
+    ...     temperature=0.0
+    ... )
     >>> isinstance(result, str)
     True
 
