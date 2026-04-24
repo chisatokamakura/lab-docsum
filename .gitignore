@@ -16,4 +16,5 @@ bad_encoding.bin
 coverage.xml
 tmp*.txt
 b.txt
+a.txt
 test_utf16.txt
