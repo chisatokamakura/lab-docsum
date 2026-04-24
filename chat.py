@@ -18,6 +18,8 @@ from tools.doctests import doctests, tool_schema as doctests_schema
 from tools.rm import rm, tool_schema as rm_schema
 from tools.write_file import write_file, tool_schema as write_file_schema
 from tools.write_files import write_files, tool_schema as write_files_schema
+from tools.pip_install import pip_install
+from tools.pip_install import tool_schema as pip_install_schema
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -151,6 +153,7 @@ class Chat:
             rm_schema,
             write_file_schema,
             write_files_schema,
+            pip_install_schema,
         ]
 
         available_functions = {
@@ -162,6 +165,7 @@ class Chat:
                 "write_file": write_file,
                 "write_files": write_files,
                 "rm": rm,
+                "pip_install": pip_install,
             }
 
         # in order to make non deterministic code deterministic:
