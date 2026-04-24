@@ -34,7 +34,7 @@ def write_files(files, commit_message):
                 not isinstance(path, str)
                 or os.path.isabs(path)
                 or '..' in path
-                or path == 'README.md'
+                or os.path.basename(path) == 'README.md'
             ):
                 return 'Invalid path'
 
@@ -50,7 +50,7 @@ def write_files(files, commit_message):
         for file_info in files:
             path = file_info['path']
             if path.endswith('.py'):
-                doctests(path)  # run silently
+                doctests(path)
 
         if len(files) == 1:
             return f"Wrote the file {files[0]['path']}"
