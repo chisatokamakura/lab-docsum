@@ -8,6 +8,7 @@ import json
 import os
 import sys
 import argparse
+import inspect
 from groq import Groq
 from tools.calculate import calculate, tool_schema as calculate_schema
 from tools.ls import ls, tool_schema as ls_schema
@@ -179,6 +180,13 @@ class Chat:
                     function_args = json.loads(tool_call.function.arguments)
                 else:
                     function_args = {}
+                valid_args = inspect.signature(function_to_call).parameters
+                function_args = {
+                    key: value
+                    for key, value in function_args.items()
+                    if key in valid_args
+                }
+
                 function_response = function_to_call(**function_args)
 
                 self.messages.append({
