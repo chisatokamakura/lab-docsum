@@ -7,6 +7,14 @@ import os
 import glob
 from git import Repo
 
+PROTECTED_FILES = {
+    'README.md',
+    'AGENTS.md',
+    'requirements.txt',
+    'pyproject.toml',
+    '.gitignore',
+}
+
 
 def rm(path):
     '''
@@ -38,7 +46,17 @@ def rm(path):
     >>> rm('file_that_does_not_exist.txt')
     'Error: file not found'
     '''
-    if not isinstance(path, str) or os.path.isabs(path) or '..' in path:
+    if (
+        not isinstance(path, str)
+        or os.path.isabs(path)
+        or '..' in path
+    ):
+        return 'Invalid path'
+
+    if path in PROTECTED_FILES:
+        return 'Invalid path'
+
+    if '*' in path and not path.startswith('tmp'):
         return 'Invalid path'
 
     try:
@@ -51,7 +69,11 @@ def rm(path):
         for match in matches:
             if os.path.isdir(match):
                 continue
-            if os.path.isabs(match) or '..' in match:
+            if (
+                os.path.isabs(match)
+                or '..' in match
+                or os.path.basename(match) in PROTECTED_FILES
+            ):
                 return 'Invalid path'
             os.remove(match)
             removed_files.append(match)

@@ -1,10 +1,10 @@
 # lab-docsum 
 
-[![doctests](https://github.com/chisatokamakura/lab-docsum/actions/workflows/doctest.yml/badge.svg)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/doctest.yml)
-[![integration-tests](https://github.com/chisatokamakura/lab-docsum/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/integration-tests.yml)
-[![flake8](https://github.com/chisatokamakura/lab-docsum/actions/workflows/flake8.yaml/badge.svg)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/flake8.yaml)
+[![doctests](https://github.com/chisatokamakura/lab-docsum/actions/workflows/doctest.yml/badge.svg?branch=second-version)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/doctest.yml)
+[![integration-tests](https://github.com/chisatokamakura/lab-docsum/actions/workflows/integration-tests.yml/badge.svg?branch=second-version)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/integration-tests.yml)
+[![flake8](https://github.com/chisatokamakura/lab-docsum/actions/workflows/flake8.yaml/badge.svg?branch=second-version)](https://github.com/chisatokamakura/lab-docsum/actions/workflows/flake8.yaml)
 [![PyPI version](https://img.shields.io/pypi/v/cmc-cs040-chisatokamakura.svg)](https://pypi.org/project/cmc-cs040-chisatokamakura/)
-[![coverage](https://codecov.io/gh/chisatokamakura/lab-docsum/branch/main/graph/badge.svg)](https://codecov.io/gh/chisatokamakura/lab-docsum)
+[![coverage](https://codecov.io/gh/chisatokamakura/lab-docsum/branch/second-version/graph/badge.svg)](https://codecov.io/gh/chisatokamakura/lab-docsum)
 
 This project is a command-line LLM assistant. It contains a variety of tools that is able to be called both automatically and manually.
 

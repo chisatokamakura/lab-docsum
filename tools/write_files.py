@@ -34,6 +34,7 @@ def write_files(files, commit_message):
                 not isinstance(path, str)
                 or os.path.isabs(path)
                 or '..' in path
+                or path == 'README.md'
             ):
                 return 'Invalid path'
 
