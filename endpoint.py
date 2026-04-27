@@ -7,7 +7,12 @@ The existing "model" just counts the number of times that the user has input a m
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import uvicorn
+import os
+from groq import Groq, BadRequestError
+from dotenv import load_dotenv
 from chat import Chat
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -35,7 +40,15 @@ async def chat_completions(request: dict) -> dict:
     last_message = messages[-1] if messages else {"role": "user", "content": ""}
     last_content = last_message.get("content", "")
     
-    response_content = chat.send_message(last_content)
+    try:
+        response_content = chat.send_message(last_content)
+    except BadRequestError:
+        client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        fallback = client.chat.completions.create(
+            model=Chat.MODEL,
+            messages=chat.messages,
+        )
+        response_content = fallback.choices[0].message.content
     
     return {
         "id": "chatcmpl-123",
